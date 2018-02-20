@@ -19,9 +19,6 @@ export class CadastroComponent {
 
     cadastrar(event) {
 
-        event.preventDefault();
-        console.log(this.foto);
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
