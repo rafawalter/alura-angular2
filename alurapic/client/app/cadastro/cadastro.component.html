@@ -1,5 +1,5 @@
 <div class="container">
-
+    <h1 class="text-center">{{foto.titulo}}</h1>
     <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label>URL</label>
                 <input name='url' [(ngModel)]="foto.url" formControlName='url' class="form-control" autocomplete="off">
-                <span *ngIf='meuForm.controls.url.invalid' class="form-control alert-danger">
+                <span *ngIf='!meuForm.controls.url.valid' class="form-control alert-danger">
                     URL obrigatória
                 </span>
             </div>
