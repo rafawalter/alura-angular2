@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { FotoComponent } from "../foto/foto.component";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { FotoService } from "../foto/foto.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -13,10 +14,27 @@ export class CadastroComponent {
     foto: FotoComponent = new FotoComponent();
     service: FotoService;
     meuForm: FormGroup;
+    route: ActivatedRoute;
+    mensagem: string = '';
 
-    constructor(service: FotoService, fb: FormBuilder) {
+    constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute) {
 
+        this.route = route;
         this.service = service;
+
+        this.route.params.subscribe(params => {
+
+            let id = params['id'];
+
+            if(id) {
+
+                this.service.buscaPorId(id)
+                    .subscribe(
+                        foto => this.foto = foto,
+                        erro => console.log(erro)
+                    );
+            }
+        });
 
         this.meuForm = fb.group({
 
@@ -31,9 +49,6 @@ export class CadastroComponent {
     cadastrar(event) {
         event.preventDefault();
         console.log(this.foto);
-
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
 
         this.service.cadastra(this.foto)
             .subscribe(() => {
