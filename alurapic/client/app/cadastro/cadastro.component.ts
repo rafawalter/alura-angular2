@@ -55,7 +55,7 @@ export class CadastroComponent {
         this.service.cadastra(this.foto)
             .subscribe(() => {
                 this.foto = new FotoComponent();
-                this.router.navigate(['']);
+                this.router.navigate(['']) ;
             }, erro => console.log(erro));
     }
 }
