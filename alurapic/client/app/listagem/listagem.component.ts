@@ -25,24 +25,20 @@ export class ListagemComponent {
 
     remove(foto: FotoComponent): void {
 
-        if(confirm('Tem certeza?')) {
-
-            this.service
-            .remove(foto)
-            .subscribe(
-                fotos =>  {
-                    let novasFotos = this.fotos.slice(0);
-                    let indice = novasFotos.indexOf(foto);
-                    novasFotos.splice(indice, 1);
-                    this.fotos = novasFotos;
-                    this.mensagem = 'Foto removida com sucesso';
-                },
-                erro => {
-                    console.log(erro);
-                    this.mensagem = 'Não foi possível remover a foto';
-                }
-            )
-        }
-
+        this.service
+        .remove(foto)
+        .subscribe(
+            fotos =>  {
+                let novasFotos = this.fotos.slice(0);
+                let indice = novasFotos.indexOf(foto);
+                novasFotos.splice(indice, 1);
+                this.fotos = novasFotos;
+                this.mensagem = 'Foto removida com sucesso';
+            },
+            erro => {
+                console.log(erro);
+                this.mensagem = 'Não foi possível remover a foto';
+            }
+        )
     }
 }
