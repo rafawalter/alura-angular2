@@ -25,7 +25,9 @@ export class ListagemComponent {
 
     remove(foto: FotoComponent): void {
 
-        this.service
+        if(confirm('Tem certeza?')) {
+
+            this.service
             .remove(foto)
             .subscribe(
                 fotos =>  {
@@ -40,5 +42,7 @@ export class ListagemComponent {
                     this.mensagem = 'Não foi possível remover a foto';
                 }
             )
+        }
+
     }
 }
